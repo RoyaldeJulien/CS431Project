@@ -1,5 +1,5 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 //same as a process, but records information about itself as it runs
 //such as when it finished and at what clock values it was running
@@ -9,18 +9,18 @@ public class RecordedProcess extends Process {
 	private static int clock = 0;
 	//record when the process finishes
 	private int timeFinished;
-	//list of clock ticks in which the process was running
-	private List<Integer> whenRun;
+	//maps clock ticks in which the process ran to true
+	private Map<Integer, Boolean> whenRun;
 	
 	public RecordedProcess(String name, int timeToComplete) {
 		super(name, timeToComplete);
-		whenRun = new ArrayList<Integer>();
+		whenRun = new HashMap<>();
 	}
 	
 	@Override
 	public void step() {
 		super.step();
-		whenRun.add(clock);
+		whenRun.put(clock, true);
 		if (this.isDone()) {
 			timeFinished = clock;
 		}
@@ -34,11 +34,7 @@ public class RecordedProcess extends Process {
 		else return timeFinished;
 	}
 	
-	public List<Integer> GetWhenRun() {
-		List<Integer> result = new ArrayList<>();
-		for (int i = 0; i < whenRun.size(); i++) {
-			result.add(whenRun.get(i).intValue());
-		}
-		return result;
+	public boolean ranAt(int time) {
+		return whenRun.containsKey(time);
 	}
 }
