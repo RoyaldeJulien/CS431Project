@@ -37,4 +37,8 @@ public class RecordedProcess extends Process {
 	public boolean ranAt(int time) {
 		return whenRun.containsKey(time);
 	}
+	
+	public static void resetClock() {
+		clock = 0;
+	}
 }
