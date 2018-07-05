@@ -77,7 +77,7 @@ public class TestSchedulers {
 			String rowLabel = p.getProcessName() + "(" + p.GetTimeFinished()+")";
 			result.append(padRight(rowLabel, padlength) + "|");
 			//create the rest of the row
-			for (int i = 0; i <= p.GetTimeFinished(); i++) {
+			for (int i = 0; i < p.GetTimeFinished(); i++) {
 				if (p.ranAt(i)) {
 					result.append(runningchar);
 				}
@@ -93,11 +93,11 @@ public class TestSchedulers {
 		
 		//create table addendum
 		result.append("*TF = Time finished*\n");
-		int avgtime = 0;
+		double avgtime = 0;
 		for (RecordedProcess p : jobs) {
 			avgtime += p.GetTimeFinished();
 		}
-		avgtime /= jobs.size();
+		avgtime /= (double)jobs.size();
 		result.append("Average Completion Time: " + avgtime + "\n");
 		
 		//return table

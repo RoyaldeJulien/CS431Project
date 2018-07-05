@@ -22,7 +22,7 @@ public class RecordedProcess extends Process {
 		super.step();
 		whenRun.put(clock, true);
 		if (this.isDone()) {
-			timeFinished = clock;
+			timeFinished = clock + 1;
 		}
 		clock++;
 	}
